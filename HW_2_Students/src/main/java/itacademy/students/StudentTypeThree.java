@@ -3,6 +3,7 @@ package itacademy.students;
 import itacademy.api.IPracticing;
 import itacademy.api.IStudent;
 import itacademy.dto.Skills;
+import itacademy.utils.NumberUtils;
 
 public class StudentTypeThree implements IStudent, IPracticing {
     private static final int SLOWDOWN_COEFFICIENT = 3;
@@ -16,7 +17,8 @@ public class StudentTypeThree implements IStudent, IPracticing {
 
     @Override
     public double doPractice() {
-        return this.learnedSkill.getHoursForMasterSkill() * SLOWDOWN_COEFFICIENT / this.talent;
+        double practiceTime = this.learnedSkill.getHoursForMasterSkill() / this.talent * SLOWDOWN_COEFFICIENT;
+        return NumberUtils.roundToOneDecimalPlaces(practiceTime);
     }
 
     @Override
