@@ -7,8 +7,6 @@ import itacademy.students.StudentTypeThree;
 import itacademy.students.StudentTypeTwo;
 import itacademy.utils.NumberUtils;
 
-import java.util.concurrent.ThreadLocalRandom;
-
 public class StudentsFactory {
     private static final double MIN_TALENT = 0.1;
     private static final double MAX_TALENT = 1;
@@ -20,7 +18,7 @@ public class StudentsFactory {
      * @return студент типа 1
      */
     public static IStudent createStudentTypeOne(Skills skill) {
-        return new StudentTypeOne(getRandomTalent(),skill);
+        return new StudentTypeOne(NumberUtils.getRandomNumber(MIN_TALENT,MAX_TALENT),skill);
     }
 
     /**
@@ -30,7 +28,7 @@ public class StudentsFactory {
      * @return студент типа 2
      */
     public static IStudent createStudentTypeTwo(Skills skill) {
-        return new StudentTypeTwo(getRandomTalent(),skill);
+        return new StudentTypeTwo(NumberUtils.getRandomNumber(MIN_TALENT,MAX_TALENT),skill);
     }
 
     /**
@@ -40,18 +38,6 @@ public class StudentsFactory {
      * @return студент типа 3
      */
     public static IStudent createStudentTypeThree(Skills skill) {
-        return new StudentTypeThree(getRandomTalent(),skill);
-    }
-
-    /**
-     * Метод генерирует случайный талант в промежутке между
-     * минимальным и максимальным возможным талантом студента
-     *
-     * @return талант студента
-     */
-    private static double getRandomTalent() {
-        ThreadLocalRandom rnd = ThreadLocalRandom.current();
-        double talent = rnd.nextDouble(MIN_TALENT,MAX_TALENT);
-        return NumberUtils.roundToOneDecimalPlaces(talent);
+        return new StudentTypeThree(NumberUtils.getRandomNumber(MIN_TALENT,MAX_TALENT),skill);
     }
 }
