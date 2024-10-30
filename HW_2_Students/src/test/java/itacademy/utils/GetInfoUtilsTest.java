@@ -11,11 +11,11 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class GetInfoUtilsTest {
-    private final IStudent student = new StudentTypeOne(1, Skills.JAVA_CORE);
-    private final IStudent studentWithNullableSkill = new StudentTypeOne(1,null);
+    private final IStudent student = new StudentTypeOne(1);
 
     @Test
     void getPracticeTimeTest() {
+        student.setSkill(Skills.JAVA_CORE);
         String expected = "Затрачено часов на практику: 66.0";
         String result = GetInfoUtils.getPracticeTime((IPracticing) student);
 
@@ -24,6 +24,7 @@ class GetInfoUtilsTest {
 
     @Test
     void getAnalyzeTimeTest() {
+        student.setSkill(Skills.JAVA_CORE);
         String expected = "Затрачено часов на разбор: 66.0";
         String result = GetInfoUtils.getAnalyzeTime((IAnalyzable) student);
 
@@ -32,6 +33,7 @@ class GetInfoUtilsTest {
 
     @Test
     void getBeingInTheFlowTimeTest() {
+        student.setSkill(Skills.JAVA_CORE);
         String expected = "Затрачено часов на пребывание в потоке: 66.0";
         String result = GetInfoUtils.getBeingInTheFlowTime((IFlowable) student);
 
@@ -40,6 +42,7 @@ class GetInfoUtilsTest {
 
     @Test
     void getAllLearningTimeTest() {
+        student.setSkill(Skills.JAVA_CORE);
         String expected = "Затрачено часов на полное изучение навыка: 198.0";
         String result = GetInfoUtils.getAllLearningTime(student);
 
@@ -48,6 +51,7 @@ class GetInfoUtilsTest {
 
     @Test
     void getAllStudentInfoTest() {
+        student.setSkill(Skills.JAVA_CORE);
         String expected = "Студент типа 1, талант - 1.0, изучаемый навык - Программирование на Java\n"
                 + "Затрачено часов на практику: 66.0\n"
                 +"Затрачено часов на разбор: 66.0\n"
@@ -61,18 +65,18 @@ class GetInfoUtilsTest {
     @Test
     void nullArgumentsTest() {
         assertThrows(NullPointerException.class,
-                () -> GetInfoUtils.getPracticeTime((IPracticing) studentWithNullableSkill));
+                () -> GetInfoUtils.getPracticeTime((IPracticing) student));
 
         assertThrows(NullPointerException.class,
-                () -> GetInfoUtils.getAnalyzeTime((IAnalyzable) studentWithNullableSkill));
+                () -> GetInfoUtils.getAnalyzeTime((IAnalyzable) student));
 
         assertThrows(NullPointerException.class,
-                () -> GetInfoUtils.getBeingInTheFlowTime((IFlowable) studentWithNullableSkill));
+                () -> GetInfoUtils.getBeingInTheFlowTime((IFlowable) student));
 
         assertThrows(NullPointerException.class,
-                () -> GetInfoUtils.getAllLearningTime(studentWithNullableSkill));
+                () -> GetInfoUtils.getAllLearningTime(student));
 
         assertThrows(NullPointerException.class,
-                () -> GetInfoUtils.getAllStudentInfo(studentWithNullableSkill));
+                () -> GetInfoUtils.getAllStudentInfo(student));
     }
 }

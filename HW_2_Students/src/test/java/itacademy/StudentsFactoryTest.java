@@ -13,21 +13,21 @@ class StudentsFactoryTest {
 
     @Test
     void createStudentTypeOneTest() {
-        IStudent student = StudentsFactory.createStudentTypeOne(Skills.JAVA_CORE);
+        IStudent student = StudentsFactory.createStudentTypeOne();
 
         assertInstanceOf(StudentTypeOne.class, student);
     }
 
     @Test
     void createStudentTypeTwoTest() {
-        IStudent student = StudentsFactory.createStudentTypeTwo(Skills.JAVA_CORE);
+        IStudent student = StudentsFactory.createStudentTypeTwo();
 
         assertInstanceOf(StudentTypeTwo.class, student);
     }
 
     @Test
     void createStudentTypeThreeTest() {
-        IStudent student = StudentsFactory.createStudentTypeThree(Skills.JAVA_CORE);
+        IStudent student = StudentsFactory.createStudentTypeThree();
 
         assertInstanceOf(StudentTypeThree.class, student);
     }

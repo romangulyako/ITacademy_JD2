@@ -5,17 +5,27 @@ import itacademy.api.IFlowable;
 import itacademy.api.IPracticing;
 import itacademy.api.IStudent;
 import itacademy.dto.Skills;
+import itacademy.utils.ExceptionUtils;
 import itacademy.utils.NumberUtils;
 
 public class StudentTypeOne implements IStudent, IAnalyzable, IPracticing, IFlowable {
     private static final int ACTIONS_COUNT = 3;
 
     private final double talent;
-    private final Skills learnedSkill;
+    private Skills skill;
 
-    public StudentTypeOne(double talent, Skills learnedSkill) {
+    public StudentTypeOne(double talent) {
         this.talent = talent;
-        this.learnedSkill = learnedSkill;
+    }
+
+    @Override
+    public void setSkill(Skills skill) {
+        this.skill = skill;
+    }
+
+    @Override
+    public Skills getSkill() {
+        return skill;
     }
 
     @Override
@@ -41,9 +51,11 @@ public class StudentTypeOne implements IStudent, IAnalyzable, IPracticing, IFlow
 
     @Override
     public String toString() {
+        ExceptionUtils.checkSkillSetting(this);
+
         return "Студент типа 1, "
                 + "талант - " + this.talent + ", "
-                + "изучаемый навык - " + this.learnedSkill.getNameSkill();
+                + "изучаемый навык - " + this.skill.getNameSkill();
     }
 
     /**
@@ -53,7 +65,9 @@ public class StudentTypeOne implements IStudent, IAnalyzable, IPracticing, IFlow
      * @return количество часов
      */
     private double doPartOfLearning() {
-        double time = this.learnedSkill.getHoursForMasterSkill()
+        ExceptionUtils.checkSkillSetting(this);
+
+        double time = this.skill.getHoursForMasterSkill()
                 / this.talent
                 / ACTIONS_COUNT;
         return NumberUtils.roundToOneDecimalPlaces(time);

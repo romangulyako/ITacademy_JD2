@@ -4,17 +4,27 @@ import itacademy.api.IAnalyzable;
 import itacademy.api.IPracticing;
 import itacademy.api.IStudent;
 import itacademy.dto.Skills;
+import itacademy.utils.ExceptionUtils;
 import itacademy.utils.NumberUtils;
 
 public class StudentTypeTwo implements IStudent, IAnalyzable, IPracticing {
     private static final int ACTIONS_COUNT = 2;
     private static final int SLOWDOWN_COEFFICIENT = 2;
     private final double talent;
-    private final Skills learnedSkill;
+    private Skills skill;
 
-    public StudentTypeTwo(double talent, Skills learnedSkill) {
+    public StudentTypeTwo(double talent) {
         this.talent = talent;
-        this.learnedSkill = learnedSkill;
+    }
+
+    @Override
+    public void setSkill(Skills skill) {
+        this.skill = skill;
+    }
+
+    @Override
+    public Skills getSkill() {
+        return skill;
     }
 
     @Override
@@ -34,9 +44,11 @@ public class StudentTypeTwo implements IStudent, IAnalyzable, IPracticing {
 
     @Override
     public String toString() {
+        ExceptionUtils.checkSkillSetting(this);
+
         return "Студент типа 2, "
                 + "талант - " + this.talent + ", "
-                + "изучаемый навык - " + this.learnedSkill.getNameSkill();
+                + "изучаемый навык - " + this.skill.getNameSkill();
     }
 
     /**
@@ -46,8 +58,10 @@ public class StudentTypeTwo implements IStudent, IAnalyzable, IPracticing {
      * @return количество часов
      */
     private double doPartOfLearning() {
+        ExceptionUtils.checkSkillSetting(this);
+
         double time = SLOWDOWN_COEFFICIENT
-                * this.learnedSkill.getHoursForMasterSkill()
+                * this.skill.getHoursForMasterSkill()
                 / this.talent
                 / ACTIONS_COUNT;
         return NumberUtils.roundToOneDecimalPlaces(time);
