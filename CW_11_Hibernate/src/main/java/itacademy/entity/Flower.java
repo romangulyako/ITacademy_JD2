@@ -1,4 +1,4 @@
-package itacademy.dto.entity;
+package itacademy.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Builder
 @Data
@@ -14,15 +13,15 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Entity
 @Table
-public class Wheel implements Serializable {
+public class Flower {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column
     private Integer id;
 
     @Column
-    private String size;
+    private String name;
 
     @Column
-    private String type;
+    private Integer age;
 }

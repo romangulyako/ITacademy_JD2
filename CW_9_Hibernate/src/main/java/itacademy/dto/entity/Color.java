@@ -4,9 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Builder
 @Data
@@ -14,15 +14,13 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Entity
 @Table
-public class Wheel implements Serializable {
+public class Color {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(generator = "gen")
+    @GenericGenerator(name = "gen", strategy = "uuid")
     @Column
-    private Integer id;
+    private String id;
 
     @Column
-    private String size;
-
-    @Column
-    private String type;
+    private String color;
 }
