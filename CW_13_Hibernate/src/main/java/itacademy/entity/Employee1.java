@@ -1,25 +1,27 @@
 package itacademy.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
-@Data
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table
-@DiscriminatorValue("E")
+@Table(name = "EMPLOYEE_1")
+//@PrimaryKeyJoinColumn(name = "PERSON_ID")
+//@DiscriminatorValue("E")
 @DynamicInsert
 @DynamicUpdate
-public class Employee extends Person {
+public class Employee1 extends Person {
     private static final long serialVersionUID = 4L;
+
+    @Column
     private String company;
+
+    @Column
     private double salary;
 }

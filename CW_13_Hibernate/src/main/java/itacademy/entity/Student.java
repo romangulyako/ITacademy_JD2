@@ -1,20 +1,25 @@
 package itacademy.entity;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 
+import javax.persistence.*;
+
+@EqualsAndHashCode(callSuper = true)
+@SuperBuilder
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table
-@DiscriminatorValue("S")
+@Table(name = "STUDENT")
+//@PrimaryKeyJoinColumn(name = "PERSON_ID")
+//@DiscriminatorValue("S")
 public class Student extends Person {
     private static final long serialVersionUID = 3L;
 
+    @Column
     private String faculty;
+    @Column
     private Double mark;
 }

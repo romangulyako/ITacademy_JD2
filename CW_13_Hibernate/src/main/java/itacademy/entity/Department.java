@@ -19,6 +19,6 @@ public class Department extends DateEntity {
     @Column(name = "department_name")
     private String departmentName;
     @OneToMany(cascade = CascadeType.PERSIST)
-    private List<Employee> employees = new ArrayList<>(0);
+    private List<Employee1> employees = new ArrayList<>(0);
 
 }
