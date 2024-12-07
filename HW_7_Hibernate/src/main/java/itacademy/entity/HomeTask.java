@@ -8,10 +8,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 @SuperBuilder
@@ -21,6 +18,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Entity
 @Table(name = "home_task")
+@PrimaryKeyJoinColumn(name = "TASK_ID")
 public class HomeTask extends Task {
     @Column(name = "start_date")
     private Date startDate;
