@@ -13,7 +13,10 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "TASK_TYPE",
+        discriminatorType = DiscriminatorType.CHAR)
+@DiscriminatorValue("T")
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

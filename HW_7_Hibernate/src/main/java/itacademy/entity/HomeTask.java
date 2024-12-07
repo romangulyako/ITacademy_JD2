@@ -17,8 +17,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "home_task")
-@PrimaryKeyJoinColumn(name = "TASK_ID")
+@DiscriminatorValue("H")
 public class HomeTask extends Task {
     @Column(name = "start_date")
     private Date startDate;

@@ -6,10 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @SuperBuilder
 @Data
@@ -17,8 +14,7 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "work_task")
-@PrimaryKeyJoinColumn(name = "TASK_ID")
+@DiscriminatorValue("W")
 public class WorkTask extends Task {
     @Column
     private double cost;
