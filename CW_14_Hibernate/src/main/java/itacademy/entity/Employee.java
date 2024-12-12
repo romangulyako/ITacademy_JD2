@@ -10,6 +10,7 @@ import java.util.Set;
 
 @Builder
 @Data
+@ToString(exclude = "meetings")
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -31,8 +32,7 @@ public class Employee implements Serializable {
     @Column(name = "last_name")
     private String lastName;
 
-    @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER)
+    @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL)
     private EmployeeDetails employeeDetails;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -42,7 +42,7 @@ public class Employee implements Serializable {
     @ManyToMany(cascade = {CascadeType.DETACH,
             CascadeType.MERGE,
             CascadeType.PERSIST,
-            CascadeType.REFRESH})
+            CascadeType.REFRESH}, fetch = FetchType.LAZY)
     @JoinTable(name = "employee_meeting",
             joinColumns = {@JoinColumn(name = "employee_id")},
             inverseJoinColumns = {@JoinColumn(name = "meeting_id")})
