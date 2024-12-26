@@ -1,8 +1,11 @@
+<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html>
 <body>
 <h2>Hello World!</h2>
 <%= request.getAttribute("newFio")%>
 <%= session.getAttribute("fioage")%>
+<% session.setAttribute("user","admin"); %>
+<% session.setAttribute("counter",1); %>
 
 <a href="info?fio=Ivan&age=25">Info Servlet</a>
 
@@ -15,6 +18,7 @@
     <input name="browser" type="radio" value="CHROME"> Ie <br/>
     <button>Send</button>
 </form>
+<%@include file="include.jsp"%>
 
 </body>
 </html>
