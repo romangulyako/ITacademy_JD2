@@ -12,5 +12,20 @@ public class App
 
         ISender sender = context.getBean("emailSender", ISender.class);
         System.out.println(sender.getAddress());
+
+        Person person = context.getBean("person", Person.class);
+        System.out.println(person.getName());
+        person.getEmailSender().send("Hello World");
+        System.out.println(person.getEmailSender().getAddress());
+
+        ConstructorBean constructorBean = context.getBean("constructorBean", ConstructorBean.class);
+
+        System.out.println(constructorBean.getName());
+
+        constructorBean.getMap().forEach((id, name) -> System.out.println(id + " " + name));
+
+        constructorBean.getStringList().forEach(System.out::println);
+
+        ((ClassPathXmlApplicationContext)context).close();
     }
 }
