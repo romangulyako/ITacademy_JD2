@@ -1,0 +1,73 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+ http://www.springframework.org/schema/aop
+  http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+    <!--context:annotation-config/>
+    <context:component-scan base-package="org.example.aopanotation"/>
+    <aop:aspectj-autoproxy/>
+    <bean id="address3" class="org.example.autowired.AddressHome"
+          p:id="1" p:city="Minsk" p:street="Brovki" p:house="45">
+    </bean>
+
+    <bean id="address2" class="org.example.autowired.Address"
+          p:id="1" p:city="Minsk" p:street="Brovki" p:house="55">
+    </bean>
+
+
+    <bean id="person" class="org.example.autowired.Person" scope="prototype"
+          p:id="1" p:name="Petr" p:surname="Petrov">
+    </bean-->
+
+
+
+    <bean id="emailSender" class="itacademy.EmailSender">
+        <property name="address" value="Minsk"/>
+    </bean>
+
+    <bean id="serviceSender" class="itacademy.SenderService"
+          p:sender="#{emailSender}">
+    </bean>
+
+
+    <!--bean id="constructorBean" class="org.example.ConstructorBean">
+        <property name="name" value="#{emailSender.address}"/>
+        <property name="stringList">
+            <list>
+                <value>5</value>
+                <value>6</value>
+                <value>7</value>
+            </list>
+        </property>
+        <property name="map">
+            <null/>
+        </property>
+    </bean-->
+
+
+    <bean id="notifier" class="itacademy.aop.Notification">
+        <property name="name" value="#{emailSender.address}"/>
+    </bean>
+
+    <bean id="logger" class="itacademy.aop.LogTimer"/>
+
+    <aop:config>
+        <aop:aspect id="note" ref="notifier">
+            <aop:pointcut id="advice" expression="execution(* itacademy.SenderService.send(..))"/>
+            <aop:after method="notifyAfter" pointcut-ref="advice"/>
+            <aop:around method="notifyBefore" pointcut-ref="advice"/>
+        </aop:aspect>
+        <aop:aspect id="note" ref="logger">
+            <aop:pointcut id="advice" expression="execution(* itacademy.SenderService.send(String))"/>
+            <aop:before method="logStart" pointcut-ref="advice"/>
+            <aop:after method="logEnd" pointcut-ref="advice"/>
+        </aop:aspect>
+    </aop:config>
+</beans>
