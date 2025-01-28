@@ -14,10 +14,11 @@ http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 >
 
     <context:annotation-config/>
+    <context:component-scan base-package="itacademy.annotation"/>
     <!--context:component-scan base-package="itacademy.aopanotation"/>
     <aop:aspectj-autoproxy/-->
 
-    <bean id="emailSender" class="itacademy.EmailSender">
+    <!--bean id="emailSender" class="itacademy.EmailSender">
         <property name="address" value="Minsk"/>
     </bean>
 
@@ -64,13 +65,13 @@ http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 
     <bean id="address2" class="itacademy.autowired.Address"
           p:id="1" p:city="Minsk" p:street="Brovki" p:house="55">
-        <!--qualifier value="addressValue"/-->
+        <qualifier value="addressValue"/>
     </bean>
 
     <bean id="personAutowired" class="itacademy.autowired.Person" scope="prototype"
           p:id="1" p:name="Petr" p:surname="Petrov"/>
 
-    <!--Для задания на занятии-->
+    <Для задания на занятии>
     <bean id="petrolEngine" class="itacademy.task.cars.PetrolEngine"
           p:cylindersCount="#{4}" p:volume="#{1.6}" p:manufacturer="Mercedes-Benz">
         <qualifier value="defaultEngine"/>
@@ -82,9 +83,9 @@ http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
     </bean>
 
     <bean id="car" class="itacademy.task.cars.Car" scope="prototype"
-          p:vin="111" p:model="Mercedes" p:type="sedan"/>
+          p:vin="111" p:model="Mercedes" p:type="sedan"/-->
 
-    <aop:config>
+    <!--aop:config>
         <aop:aspect id="note" ref="notifier">
             <aop:pointcut id="advice" expression="execution(* itacademy.SenderService.send(..))"/>
             <aop:after method="notifyAfter" pointcut-ref="advice"/>
@@ -95,5 +96,5 @@ http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
             <aop:before method="logStart" pointcut-ref="advice"/>
             <aop:after method="logEnd" pointcut-ref="advice"/>
         </aop:aspect>
-    </aop:config>
+    </aop:config-->
 </beans>
