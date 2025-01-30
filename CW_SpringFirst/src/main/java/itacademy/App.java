@@ -1,4 +1,5 @@
 package itacademy;
+import itacademy.aopannotation.TaskService;
 import itacademy.autowired.Person;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -27,8 +28,9 @@ public class App
 
         constructorBean.getStringList().forEach(System.out::println);*/
 
-        Person person = context.getBean("personAutowired", Person.class);
-        System.out.println(person.getAddress());
+        /*Person person = context.getBean("personAutowired", Person.class);
+        System.out.println(person.getAddress());*/
+
 
         ((ClassPathXmlApplicationContext)context).close();
     }
