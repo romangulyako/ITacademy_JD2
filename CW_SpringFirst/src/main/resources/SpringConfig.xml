@@ -1,6 +1,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
        xmlns:p="http://www.springframework.org/schema/p"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:tx="http://www.springframework.org/schema/tx"
@@ -10,6 +11,8 @@ http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
   http://www.springframework.org/schema/aop/spring-aop.xsd
   http://www.springframework.org/schema/tx
                   http://www.springframework.org/schema/tx/spring-tx.xsd
+                  http://www.springframework.org/schema/data/jpa
+        http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
 
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context-3.0.xsd"
@@ -19,6 +22,8 @@ http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
     <context:annotation-config/>
     <context:component-scan base-package="itacademy.task.aop"/>
     <aop:aspectj-autoproxy/>
+    <tx:annotation-driven transaction-manager="txManager"/>
+    <jpa:repositories base-package="itacademy.spring_hibernate.repository"/>
 
     <context:component-scan base-package="itacademy.spring_hibernate.dao"/>
     <context:component-scan base-package="itacademy.spring_hibernate"/>
@@ -50,7 +55,7 @@ http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQL55Dialect</prop>
                 <prop key="hibernate.show_sql">true</prop>
                 <prop key="hibernate.format_sql">false</prop>
-                <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <prop key="hibernate.hbm2ddl.auto">create</prop>
             </props>
         </property>
     </bean>
@@ -63,7 +68,7 @@ http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
         <property name="transactionManager" ref="txManager"/>
     </bean-->
 
-    <tx:advice id="txAdvice" transaction-manager="txManager">
+    <!--tx:advice id="txAdvice" transaction-manager="txManager">
         <tx:attributes>
             <tx:method name="*"/>
             <tx:method name="get*" propagation="SUPPORTS" read-only="true"/>
@@ -73,7 +78,10 @@ http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
     <aop:config>
         <aop:advisor pointcut="execution(* itacademy.spring_hibernate.service.IService.*(..))"
                      advice-ref="txAdvice"/>
-    </aop:config>
+    </aop:config-->
+
+    <!--Заменяем два верхних тега, чтобы вместо aop использовать аннотацию Transactional-->
+
 
 
     <!--bean id="emailSender" class="itacademy.EmailSender">

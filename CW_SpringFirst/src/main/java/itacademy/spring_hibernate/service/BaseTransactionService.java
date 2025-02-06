@@ -3,11 +3,14 @@ package itacademy.spring_hibernate.service;
 import itacademy.spring_hibernate.dao.IDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionTemplate;
 
 import java.io.Serializable;
 
 //@Service
+@Transactional
 public class BaseTransactionService<T> implements IService<T> {
     @Autowired
     private IDao<T> baseDao;
@@ -49,7 +52,11 @@ public class BaseTransactionService<T> implements IService<T> {
     public T update(T t) {
         return baseDao.update(t);
     }
-
+    @Transactional(
+            propagation = Propagation.SUPPORTS,
+            readOnly = true,
+            timeout = 60
+    )
     @Override
     public T get(Serializable id) {
         return baseDao.get(id);
