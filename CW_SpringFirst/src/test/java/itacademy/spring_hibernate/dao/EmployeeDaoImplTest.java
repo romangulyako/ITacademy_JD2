@@ -1,6 +1,7 @@
 package itacademy.spring_hibernate.dao;
 
 import itacademy.spring_hibernate.entity.Employee;
+import itacademy.spring_hibernate.repository.EmployeeRepository;
 import junit.framework.TestCase;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -20,8 +21,9 @@ public class EmployeeDaoImplTest extends TestCase {
     @Autowired
     private EmployeeDao dao;
 
+
+
     @Test
-    @Transactional
     @Rollback(false)
     public void addEmployee() {
         Employee employee = Employee.builder()
@@ -35,12 +37,10 @@ public class EmployeeDaoImplTest extends TestCase {
     }
 
     @Test
-    @Transactional
     public void deleteEmployee() {
         dao.delete(1);
 
         Employee employee = dao.get(1);
         assertNull(employee);
     }
-
 }
