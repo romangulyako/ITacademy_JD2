@@ -1,0 +1,48 @@
+.error {
+    color: red;
+}
+body {
+    font-family: 'Arial', sans-serif;
+    /*display: flex;*/
+    /*flex-direction: column;*/
+    min-height: 100vh;
+    margin: 0;
+}
+
+table {
+    width: 50%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+    background-color: #efefef;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+table th,
+table td {
+    border: 1px solid #dddddd;
+    padding: 10px;
+    text-align: center;
+}
+
+table th {
+    background-color: #d1d1d1;
+}
+
+input, select {
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    padding: 5px 0;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    width: 50%;
+}

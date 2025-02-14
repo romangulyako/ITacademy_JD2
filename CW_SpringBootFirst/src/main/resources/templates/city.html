@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="java">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Welcome</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Location</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="city : ${cities}">
+        <td th:utext="${city.id}">...</td>
+        <td th:utext="${city.name}">...</td>
+        <td th:utext="${city.location}">...</td>
+    </tr>
+    </tbody>
+</table>
+<div>
+    <form th:action="@{/city/add}"
+          th:object="${addCity}" method="post">
+        Name:
+        <div th:if="${#fields.hasErrors('name')}">
+            <span class="error" th:errors="*{name}"></span>
+        </div>
+        <input type="text" th:field="*{name}"/>
+        <br/>
+        Location:
+        <div th:if="${#fields.hasErrors('location')}">
+            <span class="error" th:errors="*{location}"></span>
+        </div>
+        <input type="text" th:field="*{location}"/>
+        <br/>
+        <input type="submit" value="Добавить город"/>
+    </form>
+</div>
+<br/>
+</body>
+</html>
