@@ -4,6 +4,28 @@
     <meta charset="UTF-8"/>
     <title>Welcome</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}"/>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script>
+        function addProduct() {
+            $.ajax({
+                dataType: "json",
+                type: 'get',
+                url: "/cities-rest"
+            }).done(function (data) {
+                console.log(data);
+
+                var $dropdown = $("#dropdown");
+                $.each(data, function (index, value) {
+                    $('#city').val($('#city').val() + "; name: " + value.name + " id: " + value.id);
+                    $dropdown.append($("<option />").val(value.id).text(value.name));
+                });
+            }).fail(function (data) {
+                if (console && console.log) {
+                    console.log("Error data: ", data);
+                }
+            });
+        }
+    </script>
 </head>
 <body>
 <table border="1">
@@ -41,5 +63,17 @@
     </form>
 </div>
 <br/>
+
+<input type="button" id="send" name="Получить города" value="Нажать"/>
+<input type="text" id="city" size="255">
+<select id="dropdown"></select>
+
+<script>
+    $(document).ready(function () {
+        $('#send').click(function () {
+            addProduct();
+        });
+    })
+</script>
 </body>
 </html>

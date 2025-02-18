@@ -7,10 +7,10 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 public interface CityService {
-    void addCity(CityDto cityDto);
-    void editCity(CityDto cityDto);
+    CityDto saveOrUpdate(CityDto cityDto);
     void deleteCity(Integer id);
     CityDto getCity(Integer id);
-    List<CityDto> getAllCities();
+    List<CityDto> getCities();
     Page<CityDto> getPageCities(Pageable pageable);
+    Page<CityDto> findAll(int pageNumber, int pageSize);
 }
