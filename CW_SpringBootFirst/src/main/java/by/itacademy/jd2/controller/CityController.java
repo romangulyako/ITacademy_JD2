@@ -35,8 +35,8 @@ public class CityController {
 
     @GetMapping({"/", "/cities"})
     public String getCities(Model model) {
-        model.addAttribute("cities", simpleClient.getCities());
-        //model.addAttribute("cities",cityService.getCities());
+        //model.addAttribute("cities", simpleClient.getCities());
+        model.addAttribute("cities",cityService.getCities());
         model.addAttribute("addCity", new CityDto());
         return "city";
     }

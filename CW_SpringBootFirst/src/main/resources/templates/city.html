@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="java">
+<html xmlns:th="http://www.thymeleaf.org" lang="java"
+      xmlns:sec="http://www.springframework.org/schema/security">
 <head>
     <meta charset="UTF-8"/>
     <title>Welcome</title>
@@ -28,6 +29,9 @@
     </script>
 </head>
 <body>
+<form method="post" th:action="@{/logout}">
+    <button type="submit">LOGOUT</button>
+</form>
 <table border="1">
     <thead>
     <tr>
@@ -44,7 +48,7 @@
     </tr>
     </tbody>
 </table>
-<div>
+<div sec:authorize="hasAuthority('ADMIN')">
     <form th:action="@{/city/add}"
           th:object="${addCity}" method="post">
         Name:
