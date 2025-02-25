@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="java">
+<head>
+<title>Dogs</title>
+</head>
+<body>
+<h2>All dogs</h2>
+<form th:action="@{/dogs}"
+      method="get"
+      th:object="${filter}">
+    <input type="text"
+           placeholder="name"
+           th:field="*{name}"
+           th:value="${filter.name != null ? filter.name : ''}">
+    <input type="text"
+           placeholder="type"
+           th:field="*{type}"
+           th:value="${filter.type != null ? filter.type : ''}">
+    <input type="number"
+           placeholder="type"
+           th:field="*{age}"
+           th:value="${filter.age != null ? filter.age : ''}">
+
+    <button type="submit">Apply</button>
+</form>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Age</th>
+        <th colspan="2">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="dog : ${dogs}">
+        <td th:text="${dog.name}"/>
+        <td th:text="${dog.type}"/>
+        <td th:text="${dog.age}"/>
+        <td>
+            <form th:action="@{/dogs/edit/{id}(id=${dog.id})}"
+                  method="get">
+                <button type="submit">Edit</button>
+            </form>
+        </td>
+        <td>
+            <form th:action="@{/dogs/delete/{id}(id=${dog.id})}"
+                  method="post">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<form th:if="${!dogs.isEmpty()}"
+      th:action="@{/dogs}"
+      th:object="${filter}"
+      method="get">
+    <input type="hidden"
+           th:field="*{name}"
+           th:value="${filter.name != null ? filter.name : ''}">
+    <input type="hidden"
+           th:field="*{type}"
+           th:value="${filter.type != null ? filter.type : ''}">
+    <input type="hidden"
+           th:field="*{age}"
+           th:value="${filter.age != null ? filter.age : ''}">
+    <div>
+        <div th:if="${page > 0}">
+            <button name="page"
+                    th:field="*{page}"
+                    th:value="${page - 1}">
+                <<
+            </button>
+        </div>
+        <div th:if="${page < totalPages - 1}">
+            <button name="page"
+                    th:field="*{page}"
+                    th:value="*{page + 1}">
+                >>
+            </button>
+        </div>
+    </div>
+</form>
+<div>
+    <form th:action="@{/dogs/add}"
+          method="get">
+        <button type="submit">Add new dog</button>
+    </form>
+</div>
+</body>
+</html>

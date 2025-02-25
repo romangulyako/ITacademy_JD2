@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="java">
+<head>
+    <title>Dogs</title>
+</head>
+<body>
+<h2>Enter dog's data please:</h2>
+<form th:action="@{/dogs/save}"
+      method="post"
+      th:object="${dog}">
+    <input th:if="${dog.id != null}" type="hidden" th:field="*{id}" th:value="${dog.id}">
+    <div>
+        <label>Name</label>
+        <input type="text"
+               th:field="*{name}"
+               th:value="${dog.name != null ? dog.name : ''}"
+               required/>
+    </div>
+    <div>
+        <label>Type</label>
+        <input type="text"
+               th:field="*{type}"
+               th:value="${dog.type != null ? dog.type : ''}"
+               required/>
+    </div>
+    <div>
+        <label>Age</label>
+        <input type="number"
+               th:field="*{age}"
+               th:value="${dog.age != null ? dog.age : ''}"
+               required/>
+    </div>
+    <div>
+        <button type="submit">Save</button>
+    </div>
+
+</form>
+<form th:action="@{/dogs}"
+      method="get">
+    <button type="submit">Back to dogs</button>
+</form>
+</body>
+</html>

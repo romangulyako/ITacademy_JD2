@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+    <changeSet id="create-dogs-table" author="Roman Gulyako">
+        <createTable tableName="dogs">
+            <column type="bigint" name="id" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column type="varchar(255)" name="name">
+                <constraints nullable="false"/>
+            </column>
+            <column type="varchar(255)" name="type">
+                <constraints nullable="false"/>
+            </column>
+            <column type="int" name="age">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
